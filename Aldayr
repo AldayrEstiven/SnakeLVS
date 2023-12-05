@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+        /* Estilos CSS (mantén los estilos existentes) */
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Contenido HTML (mantén el contenido existente) -->
+    </div>
+    <script>
+        // Código JavaScript (con las modificaciones para el control táctil)
+
+        const canvas = document.getElementById('snakeCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const gameMessageElement = document.getElementById('gameMessage');
+
+        // Variables para el control táctil
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        // Resto del código JavaScript (mantén el código existente)
+
+        document.addEventListener('keydown', function (event) {
+            // ... (mantén el código existente)
+        });
+
+        // Eventos táctiles para dispositivos móviles
+        canvas.addEventListener('touchstart', handleTouchStart);
+        canvas.addEventListener('touchmove', handleTouchMove);
+
+        function handleTouchStart(event) {
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+        }
+
+        function handleTouchMove(event) {
+            const touchEndX = event.touches[0].clientX;
+            const touchEndY = event.touches[0].clientY;
+
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+
+            // Determinar la dirección basada en el desplazamiento táctil
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX > 0 && direction !== 'left') {
+                    direction = 'right';
+                } else if (deltaX < 0 && direction !== 'right') {
+                    direction = 'left';
+                }
+            } else {
+                if (deltaY > 0 && direction !== 'up') {
+                    direction = 'down';
+                } else if (deltaY < 0 && direction !== 'down') {
+                    direction = 'up';
+                }
+            }
+
+            // Actualizar el punto de inicio para el próximo movimiento táctil
+            touchStartX = touchEndX;
+            touchStartY = touchEndY;
+        }
+
+        // Resto del código JavaScript (mantén el código existente)
+
+        setInterval(gameLoop, 200); // Ajuste el intervalo a 200 milisegundos para hacer que la serpiente sea más lenta
+    </script>
+</body>
+</html>
